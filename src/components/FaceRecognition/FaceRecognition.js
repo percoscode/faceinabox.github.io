@@ -3,7 +3,7 @@ import React from 'react';
 const FaceRecognition = () => {
     return (
         <div className='center'>
-            <img src={"https://i.imgur.com/GuAB8OE.jpg"}></img>
+            <img alt='' src={"https://i.imgur.com/GuAB8OE.jpg"}></img>
         </div>
     );
 }

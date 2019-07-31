@@ -25,12 +25,16 @@ const particlesOptions = {
   }
 }
 
+const initialState = {
+  input: '',
+  imageUrl: '',
+  box: {},
+}
+
 class App extends React.Component {
   constructor() {
     super();
-    this.state = {
-      input: '',
-    }
+    this.state = initialState;
   }
 
   onInputChange = (event) => {
