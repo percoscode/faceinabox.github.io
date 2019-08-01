@@ -25,31 +25,34 @@ const particlesOptions = {
   }
 }
 
-const initialState = {
-  input: '',
-  imageUrl: '',
-  box: {},
-}
-
 class App extends React.Component {
   constructor() {
     super();
-    this.state = initialState;
+    this.state = {
+      input: '',
+      imageUrl: '',
+    }
   }
 
   onInputChange = (event) => {
-    console.log(event.target.value);
+    this.setState({input: event.target.value});
   }
 
   onButtonSubmit = () => {
-    console.log('hdlrlrlr');
-    app.models.initModel({id: Clarifai.GENERAL_MODEL, version: "aa7f35c01e0642fda5cf400f543e7c40"})
-      .then(generalModel => {
-        return generalModel.predict();
-      })
-      .then(response => {
-        var concepts = response['outputs'][0]['data']['concepts']
-      })
+    // console.log('hdlrlrlr');
+    this.setState({imageUrl: this.state.input})
+    app.models
+      .predict(
+        //model id, image
+        "a403429f2ddf4b49b307e318f00e528b", this.state.input)
+      .then(
+        function(response) {
+          console.log(response);
+        },
+        function(err) {
+          console.log(err)
+        }
+      );
   }
 
   render() {  
@@ -63,7 +66,7 @@ class App extends React.Component {
         <ImageLinkForm 
           onInputChange={this.onInputChange} 
           onButtonSubmit={this.onButtonSubmit}/>
-        <FaceRecognition />
+        <FaceRecognition imageUrl={this.state.imageUrl}/>
       </div>
     );
   }
