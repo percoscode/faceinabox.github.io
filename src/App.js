@@ -31,13 +31,20 @@ class App extends React.Component {
     this.state = {
       input: '',
       imageUrl: '',
+      box: {},
     }
+  }
+
+  calculateFaceLocation = (data) => {
+
   }
 
   onInputChange = (event) => {
     this.setState({input: event.target.value});
   }
 
+  // clean this fucntion up.
+  // think ES6 and onward
   onButtonSubmit = () => {
     // console.log('hdlrlrlr');
     this.setState({imageUrl: this.state.input})
@@ -47,9 +54,9 @@ class App extends React.Component {
         "a403429f2ddf4b49b307e318f00e528b", this.state.input)
       .then(
         function(response) {
-          console.log(response);
           // how to reference bounding box
-          console.log(response.outputs[0].data.regions[0].region_info.bounding_box);
+          // console.log(response.outputs[0].data.regions[0].region_info.bounding_box);
+          this.calculateFaceLocation(response);
         },
         function(err) {
           console.log(err)
